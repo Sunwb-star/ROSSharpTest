@@ -5,15 +5,23 @@ using UnityEngine.UI;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class LaserscanDistanceFloat : UnitySubscriber<MessageTypes.Std.Float32>
-    {
-
+    public class LaserScanSubscriberYunJiSuan : UnitySubscriber<MessageTypes.Sensor.LaserScan>{
+        public LaserScanWriter laserScanWriter;
         public Text distance;
         float data;
         private bool isMessageReceived;
+
         protected override void Start()
         {
             base.Start();
+        }
+
+        protected override void ReceiveMessage(MessageTypes.Sensor.LaserScan laserScan)
+        {
+            data = laserScan.ranges[320];
+            isMessageReceived = true;
+            laserScanWriter.Write(laserScan);
+            // Debug.Log("yishoudao");
         }
 
         private void Update()
@@ -21,14 +29,6 @@ namespace RosSharp.RosBridgeClient
             if (isMessageReceived)
                 ProcessMessage();
         }
-
-        protected override void ReceiveMessage(MessageTypes.Std.Float32 message)
-        {
-            data = message.data;
-            isMessageReceived = true;
-            // Debug.Log("已收到");
-        }
-
         private void ProcessMessage ()
         {
             if(data == 0)

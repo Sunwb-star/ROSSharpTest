@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GraduationGeneralTest Scene.unity
-    guid: f22fbf6533b56ba418678c48a7d3472f
+    path: Assets/Scenes/YunJiSuanScene.unity
+    guid: 647cdd13bf85d2947a0b8ec939126687
   m_configObjects: {}
